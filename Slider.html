@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <link rel="stylesheet" href="Slider.css">
+</head>
+
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <img src="valley-63564_1280.jpg" alt="Image 1">
+            <img src="alberta-2297204_640.jpg" alt="Image 2">
+            <img src="cat-8446390_640.jpg" alt="Image 3">
+        </div>
+        <button class="prev">Prev</button>
+        <button class="next">Next</button>
+    </div>
+</body>
+
+
+<script>
+    let slideIndex = 0;
+    const prev=document.querySelector('.prev');
+    const next=document.querySelector('.next');
+
+    function changeslide(n)
+    {
+        showslide(slideIndex +=n);
+    }
+    function showslide(num)
+    {
+        const slides = document.querySelectorAll('.slider img');
+
+        slides.forEach(slide =>
+        {
+            slide.style.display ='none';
+        })
+
+        if(num == slides.length)
+        {
+            slideIndex=0;
+        }
+        if(num<0)
+        {
+            slideIndex = slides.length-1;
+        }
+        slides[slideIndex].style.display = 'block';
+    }
+
+    prev.addEventListener('click',()=>
+    {
+        changeslide(-1);
+        stopSlideShow();
+    })
+    next.addEventListener('click',()=>
+    {
+        changeslide(1);
+        stopSlideShow();
+    })
+    showslide(slideIndex);
+
+    //Logic of Automatic slider
+    function startslideshow()
+    {
+        setInterval(() => {
+            changeslide(1);
+        }, 3000);
+    }
+    startslideshow();
+
+    // function stopSlideShow() 
+    // {
+    //     clearInterval(slideInterval);
+    // }
+    
+</script>
+
+</html>
